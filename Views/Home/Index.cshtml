@@ -1,0 +1,100 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Registration_Form.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>List Of Student</h2>
+<div style="margin-left:240px;margin-top:-40px;width:220px; height:40px">
+    <text> Total Number Of Registration @ViewBag.count</text>
+</div>
+<p>
+    @Html.ActionLink("Create New", "Register")
+</p>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <p>
+        <text>EnterName</text> @Html.TextBox("Name")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Search" />
+
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().First_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Last_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().State)
+        </th>
+        <th>@Html.DisplayNameFor(model => model.First().CourseName)</th>
+        <th>@Html.DisplayName("Action")</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Last_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @{
+                    Html.RenderAction("GetCountryName", "Home", new { id = item.Country });
+                }
+            </td>
+            <td>
+                @{
+                    Html.RenderAction("GetStateName", "Home", new { id = item.State });
+                }
+            </td>
+            <td>
+                @{
+                    Html.RenderAction("GetSelectedCourse", "Home", new { id = item.StudentId });
+                }
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["Name"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })

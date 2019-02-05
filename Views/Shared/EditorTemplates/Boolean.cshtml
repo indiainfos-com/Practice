@@ -1,0 +1,8 @@
+﻿@model bool
+    @Html.RadioButton("Gender", "Male",true)@Html.Label("Male", new { htmlAttributes = new { @class = "form-control.Gender" } })
+    @Html.RadioButton("Gender", "Female",false)@Html.Label("Female", new { htmlAttributes = new { @class = "form-control.Gender" } })
+@*@foreach (var item in Model)
+{
+@Html.RadioButton("Gender", "Male") @:Male
+@Html.RadioButton("Female", "Female") @:Female
+}*@

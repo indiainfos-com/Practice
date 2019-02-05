@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Registration_Form.Models.RegistredCourse>
+
+@foreach (var item in Model)
+{
+    
+    @Html.DisplayFor(modelItem => item.Course.CourseName)<br />
+}
+
+@*<table border="1">
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Course.CourseName)</td>
+        <td>
+            @Html.DisplayNameFor(model => model.Student.First_Name)
+        </td>
+
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.First_Name)
+            </td>
+
+        </tr>
+    }
+
+    </table>*@
